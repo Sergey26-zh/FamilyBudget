@@ -2,11 +2,8 @@ package com.example.familybudget.controller.user;
 
 import com.example.familybudget.dto.user.FamilyMemberDto;
 import com.example.familybudget.dto.user.UpdateMemberDto;
-import com.example.familybudget.exception.DataValidException;
-import com.example.familybudget.service.FamilyMemberService;
+import com.example.familybudget.service.user.FamilyMemberService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -27,7 +24,7 @@ public class FamilyMemberController {
     }
 
     @DeleteMapping("/{id}")
-    public void deleteFamilyMember(@PathVariable long id) {
-        familyMemberService.delete(id);
+    public boolean deleteFamilyMember(@PathVariable long id) {
+        return familyMemberService.delete(id);
     }
 }

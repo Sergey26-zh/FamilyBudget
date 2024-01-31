@@ -1,18 +1,16 @@
 package com.example.familybudget.service;
 
 import com.example.familybudget.dto.user.FamilyMemberDto;
-import com.example.familybudget.dto.user.UpdateMemberDto;
 import com.example.familybudget.exception.DataValidException;
 import com.example.familybudget.mapper.user.FamilyMemberMapper;
 import com.example.familybudget.model.user.FamilyMember;
 import com.example.familybudget.repository.user.FamilyMemberRepository;
+import com.example.familybudget.service.user.FamilyMemberService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-
-import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;

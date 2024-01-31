@@ -1,4 +1,4 @@
-package com.example.familybudget.dto.user;
+package com.example.familybudget.dto.transaction;
 
 import jakarta.persistence.Column;
 import jakarta.validation.constraints.NotBlank;
@@ -11,12 +11,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Builder
 @Data
-public class FamilyMemberDto {
+public class TransactionTypeDto {
     private Long id;
 
     @NotBlank
-    private String firstName;
-
-    @NotBlank
-    private String lastName;
+    private String name;
 }
