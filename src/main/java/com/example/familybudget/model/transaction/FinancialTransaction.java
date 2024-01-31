@@ -14,8 +14,8 @@ import java.util.Date;
 @NoArgsConstructor
 @Builder
 @Data
-@Table(name = "transaction")
-public class Transaction {
+@Table(name = "financial_transaction")
+public class FinancialTransaction {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
