@@ -1,6 +1,6 @@
 package com.example.familybudget.model.transaction;
 
-import com.example.familybudget.model.user.User;
+import com.example.familybudget.model.user.FamilyMember;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -25,7 +25,7 @@ public class Transaction {
 
     @ManyToOne
     @JoinColumn(name = "user_id")
-    private User user;
+    private FamilyMember user;
 
     @ManyToOne
     @JoinColumn(name = "transaction_type_id")

@@ -13,8 +13,8 @@ import java.util.UUID;
 @NoArgsConstructor
 @Builder
 @Data
-@Table(name = "user")
-public class User {
+@Table(name = "family_member")
+public class FamilyMember {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
