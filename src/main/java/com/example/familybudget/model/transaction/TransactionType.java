@@ -6,6 +6,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
@@ -19,4 +21,7 @@ public class TransactionType {
 
     @Column(name = "name", length = 64, nullable = false)
     private String name;
+
+    @OneToMany(mappedBy = "transactionType")
+    private List<TransactionCategory> categories;
 }

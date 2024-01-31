@@ -19,4 +19,8 @@ public class TransactionCategory {
 
     @Column(name = "name", length = 64, nullable = false)
     private String name;
+
+    @ManyToOne
+    @JoinColumn(name = "transaction_type", nullable = false)
+    private TransactionType transactionType;
 }

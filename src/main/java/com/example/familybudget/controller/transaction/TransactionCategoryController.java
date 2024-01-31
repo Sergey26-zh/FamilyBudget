@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.*;
 public class TransactionCategoryController {
     private final TransactionCategoryService transactionCategoryService;
     @PostMapping
-    public TransactionCategoryDto create(@RequestBody TransactionCategoryDto transactionCategoryDto) {
-        return transactionCategoryService.create(transactionCategoryDto);
+    public TransactionCategoryDto create(@RequestBody TransactionCategoryDto transactionCategoryDto, long transactionTypeId) {
+        return transactionCategoryService.create(transactionCategoryDto, transactionTypeId);
     }
 
     @DeleteMapping("/{id}")

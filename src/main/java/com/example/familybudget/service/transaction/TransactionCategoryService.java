@@ -6,6 +6,7 @@ import com.example.familybudget.mapper.transaction.TransactionCategoryMapper;
 import com.example.familybudget.model.transaction.TransactionCategory;
 import com.example.familybudget.model.transaction.TransactionType;
 import com.example.familybudget.repository.transaction.TransactionCategoryRepository;
+import com.example.familybudget.repository.transaction.TransactionTypeRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -14,16 +15,26 @@ import org.springframework.transaction.annotation.Transactional;
 @RequiredArgsConstructor
 public class TransactionCategoryService {
     private final TransactionCategoryRepository transactionCategoryRepository;
+    private final TransactionTypeRepository transactionTypeRepository;
     private final TransactionCategoryMapper transactionCategoryMapper;
 
     @Transactional
-    public TransactionCategoryDto create(TransactionCategoryDto transactionCategoryDto) {
-        if (transactionCategoryRepository.existsById(transactionCategoryDto.getId())) {
-            throw new DataValidException("Transaction type already exists");
+    public TransactionCategoryDto create(TransactionCategoryDto transactionCategoryDto, long transactionTypeId) {
+        TransactionType transactionType = transactionTypeRepository.findById(transactionTypeId)
+                .orElseThrow(() -> new DataValidException("Transaction type not found"));
+
+        if (transactionCategoryRepository.existsByTransactionTypeAndName(transactionType, transactionCategoryDto.getName())) {
+            throw new DataValidException("Category with the same name already exists for this transaction type");
         }
 
-        TransactionCategory transactionCategory = transactionCategoryRepository.save(transactionCategoryMapper.toEntity(transactionCategoryDto));
-        return transactionCategoryMapper.toDto(transactionCategory);
+        TransactionCategory transactionCategory = TransactionCategory.builder()
+                .name(transactionCategoryDto.getName())
+                .transactionType(transactionType)
+                .build();
+
+        TransactionCategory savedCategory = transactionCategoryRepository.save(transactionCategory);
+
+        return transactionCategoryMapper.toDto(savedCategory);
     }
 
     @Transactional
