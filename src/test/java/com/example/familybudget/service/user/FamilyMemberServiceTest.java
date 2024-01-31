@@ -1,4 +1,4 @@
-package com.example.familybudget.service;
+package com.example.familybudget.service.user;
 
 import com.example.familybudget.dto.user.FamilyMemberDto;
 import com.example.familybudget.exception.DataValidException;
