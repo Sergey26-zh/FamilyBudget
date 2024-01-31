@@ -1,6 +1,5 @@
 package com.example.familybudget.service.transaction;
 
-import com.example.familybudget.mapper.transaction.TransactionTypeMapper;
 import com.example.familybudget.model.transaction.TransactionType;
 import com.example.familybudget.repository.transaction.TransactionTypeRepository;
 import org.junit.jupiter.api.Test;
@@ -9,7 +8,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.*;
 

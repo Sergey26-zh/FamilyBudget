@@ -28,13 +28,13 @@ public class TransactionTypeService {
 
     @Transactional
     public boolean delete(long memberId) {
-        TransactionType transactionType = validMember(memberId);
+        TransactionType transactionType = validType(memberId);
         transactionTypeRepository.deleteById(transactionType.getId());
         return true;
     }
 
-    private TransactionType validMember(long id) {
+    private TransactionType validType(long id) {
         return transactionTypeRepository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("Family member not found"));
+                .orElseThrow(() -> new IllegalArgumentException("Transaction type not found"));
     }
 }
