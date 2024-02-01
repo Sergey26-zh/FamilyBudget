@@ -32,3 +32,6 @@ gradle build
 java -jar build/libs/ServiceTemplate-1.0.jar
 ```
 Но легче всё это делать через IDE
+
+# Код 
+Backend: Обычная трёхслойная архитектура – [src/main/java/com/example/familybudget/controller](Controller), Service, Repository
