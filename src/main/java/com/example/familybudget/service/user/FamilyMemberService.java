@@ -18,10 +18,9 @@ public class FamilyMemberService {
 
     @Transactional
     public FamilyMemberDto create(FamilyMemberDto familyMemberDto) {
-        if (familyMemberRepository.existsById(familyMemberDto.getId())) {
-            throw new DataValidException("Family member already exists");
+        if (familyMemberDto.getId() == null) {
+            throw new IllegalArgumentException("Id must not be null");
         }
-
         FamilyMember familyMember = familyMemberRepository.save(familyMemberMapper.toEntity(familyMemberDto));
         return familyMemberMapper.toDto(familyMember);
     }

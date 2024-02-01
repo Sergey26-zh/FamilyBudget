@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Financial Transaction Reporting</title>
+</head>
+<body>
+<h1>Financial Transaction Reporting</h1>
+
+<div>
+    <h2>Transactions Between Dates</h2>
+    <label for="startDate">Start Date:</label>
+    <input type="date" id="startDate" required>
+
+    <label for="endDate">End Date:</label>
+    <input type="date" id="endDate" required>
+
+    <button onclick="getTransactionsBetweenDates()">Get Transactions</button>
+
+    <ul id="transactionsBetweenDatesList"></ul>
+</div>
+
+<div>
+    <h2>Transactions By User</h2>
+    <label for="user">User:</label>
+    <input type="text" id="user" required>
+
+    <button onclick="getTransactionsByUser()">Get Transactions</button>
+
+    <ul id="transactionsByUserList"></ul>
+</div>
+
+<div>
+    <h2>Transactions By Type</h2>
+    <label for="type">Transaction Type:</label>
+    <input type="text" id="type" required>
+
+    <button onclick="getTransactionsByType()">Get Transactions</button>
+
+    <ul id="transactionsByTypeList"></ul>
+</div>
+
+<div>
+    <h2>Transactions By Category</h2>
+    <label for="category">Transaction Category:</label>
+    <input type="text" id="category" required>
+
+    <button onclick="getTransactionsByCategory()">Get Transactions</button>
+
+    <ul id="transactionsByCategoryList"></ul>
+</div>
+
+<script>
+    async function getTransactionsBetweenDates() {
+        const startDate = document.getElementById('startDate').value;
+        const endDate = document.getElementById('endDate').value;
+
+        try {
+            const response = await fetch(`/api/report/betweenDates?startDate=${startDate}&endDate=${endDate}`);
+            const transactions = await response.json();
+
+            const list = document.getElementById('transactionsBetweenDatesList');
+            list.innerHTML = formatTransactionList(transactions);
+        } catch (error) {
+            console.error('Error fetching transactions between dates:', error.message);
+        }
+    }
+
+    async function getTransactionsByUser() {
+        const user = document.getElementById('user').value;
+
+        try {
+            const response = await fetch(`/api/report/byUser?user=${user}`);
+            const transactions = await response.json();
+
+            const list = document.getElementById('transactionsByUserList');
+            list.innerHTML = formatTransactionList(transactions);
+        } catch (error) {
+            console.error('Error fetching transactions by user:', error.message);
+        }
+    }
+
+    async function getTransactionsByType() {
+        const type = document.getElementById('type').value;
+
+        try {
+            const response = await fetch(`/api/report/byType?type=${type}`);
+            const transactions = await response.json();
+
+            const list = document.getElementById('transactionsByTypeList');
+            list.innerHTML = formatTransactionList(transactions);
+        } catch (error) {
+            console.error('Error fetching transactions by type:', error.message);
+        }
+    }
+
+    async function getTransactionsByCategory() {
+        const category = document.getElementById('category').value;
+
+        try {
+            const response = await fetch(`/api/report/byCategory?category=${category}`);
+            const transactions = await response.json();
+
+            const list = document.getElementById('transactionsByCategoryList');
+            list.innerHTML = formatTransactionList(transactions);
+        } catch (error) {
+            console.error('Error fetching transactions by category:', error.message);
+        }
+    }
+
+    function formatTransactionList(transactions) {
+        return transactions.map(transaction => `<li>${JSON.stringify(transaction)}</li>`).join('');
+    }
+</script>
+</body>
+</html>

@@ -14,7 +14,7 @@ public class FamilyMemberController {
     private final FamilyMemberService familyMemberService;
 
     @PostMapping
-    public FamilyMemberDto createFamilyMember(@RequestBody FamilyMemberDto familyMemberDto) {
+    public FamilyMemberDto createFamilyMember(FamilyMemberDto familyMemberDto) {
         return familyMemberService.create(familyMemberDto);
     }
 

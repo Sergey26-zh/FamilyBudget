@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Family Member Frontend</title>
+</head>
+<body>
+
+<h1>Family Member Frontend</h1>
+
+<form id="createForm">
+    <label for="firstName">First Name:</label>
+    <input type="text" id="firstName" name="firstName" required>
+    <label for="lastName">Last Name:</label>
+    <input type="text" id="lastName" name="lastName" required>
+    <button type="button" onclick="createFamilyMember()">Create</button>
+</form>
+
+<br>
+
+<form id="updateForm">
+    <label for="updateId">Member ID to Update:</label>
+    <input type="text" id="updateId" name="updateId" required>
+    <label for="updateFirstName">New First Name:</label>
+    <input type="text" id="updateFirstName" name="updateFirstName" required>
+    <label for="updateLastName">New Last Name:</label>
+    <input type="text" id="updateLastName" name="updateLastName" required>
+    <button type="button" onclick="updateFamilyMember()">Update</button>
+</form>
+
+<br>
+
+<form id="deleteForm">
+    <label for="deleteId">Member ID to Delete:</label>
+    <input type="text" id="deleteId" name="deleteId" required>
+    <button type="button" onclick="deleteFamilyMember()">Delete</button>
+</form>
+
+<script>
+    function createFamilyMember() {
+        const firstName = document.getElementById('firstName').value;
+        const lastName = document.getElementById('lastName').value;
+
+        fetch('/api/family-members', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ firstName: firstName, lastName: lastName })
+        })
+            .then(response => response.json())
+            .then(data => console.log('Created:', data))
+            .catch(error => console.error('Error:', error));
+    }
+
+    function updateFamilyMember() {
+        const id = document.getElementById('updateId').value;
+        const newFirstName = document.getElementById('updateFirstName').value;
+        const newLastName = document.getElementById('updateLastName').value;
+
+        fetch(`/api/family-members/${id}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ id: id, firstName: newFirstName, lastName: newLastName })
+        })
+            .then(response => response.json())
+            .then(data => console.log('Updated:', data))
+            .catch(error => console.error('Error:', error));
+    }
+
+    function deleteFamilyMember() {
+        const id = document.getElementById('deleteId').value;
+
+        fetch(`/api/family-members/${id}`, {
+            method: 'DELETE',
+        })
+            .then(response => response.json())
+            .then(data => console.log('Deleted:', data))
+            .catch(error => console.error('Error:', error));
+    }
+</script>
+
+</body>
+</html>

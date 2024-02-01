@@ -1,0 +1,11 @@
+ALTER TABLE family_member
+ALTER COLUMN id TYPE  BIGINT;
+
+ALTER TABLE transaction_type
+ALTER COLUMN id TYPE  BIGINT;
+
+ALTER TABLE transaction_category
+ALTER COLUMN id TYPE  BIGINT;
+
+ALTER TABLE financial_transaction
+ALTER COLUMN id TYPE  BIGINT;

@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transaction Categories</title>
+</head>
+<body>
+
+<h1>Transaction Categories</h1>
+
+<form id="transactionCategoryForm">
+    <label for="name">Category Name:</label>
+    <input type="text" id="name" name="name" required>
+
+    <label for="transactionType">Transaction Type ID:</label>
+    <input type="text" id="transactionType" name="transactionType" required>
+
+    <button type="button" onclick="createTransactionCategory()">Create Category</button>
+</form>
+
+<table id="transactionCategoryTable" border="1">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Transaction Type ID</th>
+        <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    </tbody>
+</table>
+
+<script>
+    async function createTransactionCategory() {
+        const name = document.getElementById("name").value;
+        const transactionType = document.getElementById("transactionType").value;
+
+        try {
+            const response = await fetch('/api/transaction-category', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    name: name,
+                    transactionTypeDto: {
+                        id: transactionType
+                    }
+                }),
+            });
+
+            if (!response.ok) {
+                throw new Error('Failed to create transaction category');
+            }
+
+            const result = await response.json();
+            displayTransactionCategory(result);
+        } catch (error) {
+            console.error('Error creating transaction category:', error);
+        }
+    }
+
+    async function deleteTransactionCategory(id) {
+        try {
+            const response = await fetch(`/api/transaction-category/${id}`, {
+                method: 'DELETE',
+            });
+
+            if (!response.ok) {
+                throw new Error('Failed to delete transaction category');
+            }
+
+            removeTransactionCategoryFromTable(id);
+        } catch (error) {
+            console.error('Error deleting transaction category:', error);
+        }
+    }
+
+    function displayTransactionCategory(transactionCategory) {
+        const table = document.getElementById("transactionCategoryTable").getElementsByTagName('tbody')[0];
+        const row = table.insertRow();
+        const cellId = row.insertCell(0);
+        const cellName = row.insertCell(1);
+        const cellTransactionType = row.insertCell(2);
+        const cellActions = row.insertCell(3);
+
+        cellId.innerText = transactionCategory.id;
+        cellName.innerText = transactionCategory.name;
+        cellTransactionType.innerText = transactionCategory.transactionTypeDto.id;
+
+        const deleteButton = document.createElement("button");
+        deleteButton.innerText = "Delete";
+        deleteButton.onclick = function () {
+            deleteTransactionCategory(transactionCategory.id);
+        };
+
+        cellActions.appendChild(deleteButton);
+    }
+
+    function removeTransactionCategoryFromTable(id) {
+        const table = document.getElementById("transactionCategoryTable").getElementsByTagName('tbody')[0];
+        for (let i = 0; i < table.rows.length; i++) {
+            if (table.rows[i].cells[0].innerText === id.toString()) {
+                table.deleteRow(i);
+                break;
+            }
+        }
+    }
+</script>
+
+</body>
+</html>

@@ -9,6 +9,6 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface TransactionCategoryRepository extends JpaRepository<TransactionCategory, Long> {
+public interface TransactionCategoryRepository extends CrudRepository<TransactionCategory, Long> {
     boolean existsByTransactionTypeAndName(TransactionType transactionType, String name);
 }
