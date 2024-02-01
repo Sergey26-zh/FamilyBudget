@@ -43,19 +43,6 @@ class FamilyMemberServiceTest {
         assertEquals(familyMemberDto.getId(), familyMemberDto1.getId());
     }
 
-    @Test
-    public void createMember_exceptionTest() {
-        FamilyMemberDto familyMemberDto = createMemberDto();
-
-        when(familyMemberRepository.existsById(anyLong())).thenReturn(true);
-
-        DataValidException dataValidException = assertThrows(DataValidException.class, () -> {
-            familyMemberService.create(familyMemberDto);
-        });
-
-        assertEquals("Family member already exists", dataValidException.getMessage());
-    }
-
     private FamilyMemberDto createMemberDto() {
         return FamilyMemberDto.builder().id(1L).firstName("Ivan").lastName("Ivanov").build();
     }

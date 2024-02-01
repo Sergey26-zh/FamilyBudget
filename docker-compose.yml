@@ -2,7 +2,7 @@ version: '3.8'
 services:
   postgres:
     image: postgres
-    container_name: postgres_fc
+    container_name: postgres_fb
     environment:
       POSTGRES_DB: postgres
       POSTGRES_USER: user
