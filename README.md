@@ -34,5 +34,5 @@ java -jar build/libs/ServiceTemplate-1.0.jar
 Но легче всё это делать через IDE
 
 # Код 
-* Backend: Обычная трёхслойная архитектура –[Controller](src/main/java/com/example/familybudget/controller), [Service](src/main/java/com/example/familybudget/service), [Repository](src/main/java/com/example/familybudget/repository)
+* Backend: Обычная трёхслойная архитектура – [Controller](src/main/java/com/example/familybudget/controller), [Service](src/main/java/com/example/familybudget/service), [Repository](src/main/java/com/example/familybudget/repository)
 * Frontend: [resources](src/main/resources/static)
