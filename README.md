@@ -29,7 +29,7 @@ gradle build
 ```
 Запустить jar'ник
 ```
-java -jar build/libs/ServiceTemplate-1.0.jar
+java -jar build/libs/FamilyBudget - 0.0.1-SNAPSHOT.jar
 ```
 Но легче всё это делать через IDE
 
